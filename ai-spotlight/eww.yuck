@@ -10,7 +10,7 @@
   :geometry (geometry :width "100%" :height "100%")
   :stacking "fg"
   :focusable false
-  (eventbox :onclick "/home/io/workspace/custom-widgets/ai-spotlight/scripts/close.sh"))
+  (eventbox :onclick "$HOME/.config/eww/ai-spotlight/scripts/close.sh"))
 
 (defwindow opencode_spotlight
   :monitor 0
@@ -31,32 +31,32 @@
     (box :class "search-bar" :orientation "h" :space-evenly false :valign "center"
       (label :class "icon" :text "󰚩" :halign "center" :valign "center")
       (input :class "search-input"
-             :onaccept "/home/io/workspace/custom-widgets/ai-spotlight/scripts/ask.sh '{}' '${current_model}' &"
+             :onaccept "$HOME/.config/eww/ai-spotlight/scripts/ask.sh '{}' '${current_model}' &"
              :timeout "100000ms"
              :hexpand true)
       (button :class "screenshot-btn ${attached_image != '' ? 'active' : ''}"
-              :onclick "/home/io/workspace/custom-widgets/ai-spotlight/scripts/screenshot.sh &"
-              :tooltip {attached_image != "" ? "Imagem anexada! Clique para tirar outra." : "Anexar print da tela"}
+              :onclick "$HOME/.config/eww/ai-spotlight/scripts/screenshot.sh &"
+              :tooltip {attached_image != "" ? "Image attached! Click to take another." : "Attach screenshot region"}
               (label :text "󰹑" :class "screenshot-icon"))
 
       (button :class "model-selector ${show_models == 'true' ? 'active' : ''}"
-              :onclick "/usr/bin/eww -c /home/io/workspace/custom-widgets/ai-spotlight update show_models=${show_models == 'true' ? 'false' : 'true'}"
+              :onclick "eww -c $HOME/.config/eww/ai-spotlight update show_models=${show_models == 'true' ? 'false' : 'true'}"
               (box :orientation "h" :space-evenly false :halign "center"
                 (label :text current_model :class "model-label")
                 (label :text " " :class "dropdown-icon"))))
 
     (revealer :transition "slidedown" :reveal {show_models == "true"} :duration "250ms"
       (box :class "models-dropdown" :orientation "v" :space-evenly false
-        (input :class "model-search" :onchange "/home/io/workspace/custom-widgets/ai-spotlight/scripts/search_models.sh '{}'" :timeout "10000ms" :placeholder "Pesquisar...")
+        (input :class "model-search" :onchange "$HOME/.config/eww/ai-spotlight/scripts/search_models.sh '{}'" :timeout "10000ms" :placeholder "Search models...")
         (scroll :hscroll false :vscroll true :class "models-scroll"
           (box :orientation "v" :space-evenly false
             (for model in filtered_models
-              (button :class "model-btn" :onclick "/usr/bin/eww -c /home/io/workspace/custom-widgets/ai-spotlight update current_model='${model}' show_models=false" "${model}"))))))
+              (button :class "model-btn" :onclick "eww -c $HOME/.config/eww/ai-spotlight update current_model='${model}' show_models=false" "${model}"))))))
 
     (revealer :transition "slidedown" :reveal {ai_response != "" || is_loading == "true"} :duration "300ms"
       (box :class "response-container" :orientation "v" :space-evenly false
         (scroll :hscroll false :vscroll true :class "response-scroll"
           (box :orientation "v" :space-evenly false
-            (label :class "loading" :visible {is_loading == "true"} :text "Pensando...")
+            (label :class "loading" :visible {is_loading == "true"} :text "Thinking...")
             (label :class "response-text" :visible {is_loading == "false"} :text ai_response :wrap true :xalign 0 :yalign 0)))))
   ))
