@@ -15,7 +15,7 @@ A personal collection of [EWW](https://github.com/elkowar/eww) widgets for my Ar
 
 ### 🔍 AI Spotlight (`ai-spotlight/`)
 
-A macOS Spotlight-style search bar powered by [OpenCode](https://opencode.ai/) CLI. Press a hotkey, type a prompt, select your AI model, and get a response rendered right in the bar — all without leaving your keyboard flow.
+A Spotlight-style search bar powered by [OpenCode](https://opencode.ai/) CLI. Press a hotkey, type a prompt, select your AI model, and get a response rendered right in the bar — all without leaving your keyboard flow.
 
 **Features:**
 - Prompt submission via Enter key
