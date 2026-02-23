@@ -45,7 +45,7 @@ while IFS= read -r model; do
 done <<< "$models"
 
 if [ "$json" = "[" ]; then
-    json='["Nenhum modelo encontrado"]'
+    json='["No model was found"]'
 else
     json="$json]"
 fi
