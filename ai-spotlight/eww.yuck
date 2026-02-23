@@ -1,0 +1,62 @@
+(defvar current_model "github-copilot/gpt-5-mini")
+(defvar is_loading "false")
+(defvar ai_response "")
+(defvar show_models "false")
+(defvar filtered_models "[]")
+(defvar attached_image "")
+
+(defwindow opencode_spotlight_closer
+  :monitor 0
+  :geometry (geometry :width "100%" :height "100%")
+  :stacking "fg"
+  :focusable false
+  (eventbox :onclick "/home/io/workspace/custom-widgets/ai-spotlight/scripts/close.sh"))
+
+(defwindow opencode_spotlight
+  :monitor 0
+  :geometry (geometry :x "0%"
+                      :y "20%"
+                      :width "800px"
+                      :height "80px"
+                      :anchor "top center")
+  :stacking "overlay"
+  :windowtype "normal"
+  :wm-ignore false
+  :focusable true
+  (spotlight_widget))
+
+(defwidget spotlight_widget []
+  (box :class "spotlight-container" :orientation "v" :space-evenly false
+
+    (box :class "search-bar" :orientation "h" :space-evenly false :valign "center"
+      (label :class "icon" :text "󰚩" :halign "center" :valign "center")
+      (input :class "search-input"
+             :onaccept "/home/io/workspace/custom-widgets/ai-spotlight/scripts/ask.sh '{}' '${current_model}' &"
+             :timeout "100000ms"
+             :hexpand true)
+      (button :class "screenshot-btn ${attached_image != '' ? 'active' : ''}"
+              :onclick "/home/io/workspace/custom-widgets/ai-spotlight/scripts/screenshot.sh &"
+              :tooltip {attached_image != "" ? "Imagem anexada! Clique para tirar outra." : "Anexar print da tela"}
+              (label :text "󰹑" :class "screenshot-icon"))
+
+      (button :class "model-selector ${show_models == 'true' ? 'active' : ''}"
+              :onclick "/usr/bin/eww -c /home/io/workspace/custom-widgets/ai-spotlight update show_models=${show_models == 'true' ? 'false' : 'true'}"
+              (box :orientation "h" :space-evenly false :halign "center"
+                (label :text current_model :class "model-label")
+                (label :text " " :class "dropdown-icon"))))
+
+    (revealer :transition "slidedown" :reveal {show_models == "true"} :duration "250ms"
+      (box :class "models-dropdown" :orientation "v" :space-evenly false
+        (input :class "model-search" :onchange "/home/io/workspace/custom-widgets/ai-spotlight/scripts/search_models.sh '{}'" :timeout "10000ms" :placeholder "Pesquisar...")
+        (scroll :hscroll false :vscroll true :class "models-scroll"
+          (box :orientation "v" :space-evenly false
+            (for model in filtered_models
+              (button :class "model-btn" :onclick "/usr/bin/eww -c /home/io/workspace/custom-widgets/ai-spotlight update current_model='${model}' show_models=false" "${model}"))))))
+
+    (revealer :transition "slidedown" :reveal {ai_response != "" || is_loading == "true"} :duration "300ms"
+      (box :class "response-container" :orientation "v" :space-evenly false
+        (scroll :hscroll false :vscroll true :class "response-scroll"
+          (box :orientation "v" :space-evenly false
+            (label :class "loading" :visible {is_loading == "true"} :text "Pensando...")
+            (label :class "response-text" :visible {is_loading == "false"} :text ai_response :wrap true :xalign 0 :yalign 0)))))
+  ))

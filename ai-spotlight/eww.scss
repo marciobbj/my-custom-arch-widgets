@@ -1,0 +1,140 @@
+* {
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font", "San Francisco", "SF Pro Display", sans-serif;
+}
+
+.spotlight-container {
+  background-color: #1e1e1e;
+  border-radius: 16px;
+  border: 1px solid #333333;
+  padding: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.search-bar {
+  padding: 5px 10px;
+  border-radius: 12px;
+  background-color: #252525;
+}
+
+.icon {
+  font-size: 24px;
+  color: #a0a0a0;
+  margin-right: 15px;
+}
+
+.search-input {
+  font-size: 20px;
+  color: #ffffff;
+  background: transparent;
+  border: none;
+  min-height: 40px;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.model-selector {
+  background-color: #333333;
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: #dddddd;
+  font-size: 14px;
+  margin-left: 10px;
+  transition: all 0.2s;
+}
+
+.model-selector:hover {
+  background-color: #444444;
+}
+
+.model-selector.active {
+  background-color: #555555;
+}
+
+.dropdown-icon {
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.models-dropdown {
+  background-color: #252525;
+  border-radius: 12px;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.model-btn {
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: #cccccc;
+  font-size: 14px;
+
+}
+
+.model-btn:hover {
+  background-color: #383838;
+  color: #ffffff;
+}
+
+.response-container {
+  margin-top: 15px;
+  background-color: #252525;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.response-scroll {
+  min-height: 400px;
+
+}
+
+.response-text {
+  color: #eeeeee;
+  font-size: 15px;
+
+}
+
+.loading {
+  color: #a0a0a0;
+  font-size: 15px;
+  font-style: italic;
+}
+
+.model-search {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #ffffff;
+  font-size: 14px;
+  margin-bottom: 5px;
+  border: 1px solid #333;
+}
+
+.models-scroll {
+  min-height: 250px;
+}
+
+.screenshot-btn {
+  background-color: transparent;
+  border-radius: 8px;
+  padding: 6px;
+  color: #a0a0a0;
+  margin-left: 10px;
+  transition: all 0.2s;
+}
+
+.screenshot-btn:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.screenshot-btn.active {
+  background-color: #2b5b84;
+  color: #ffffff;
+}
+
+.screenshot-icon {
+  font-size: 20px;
+}
