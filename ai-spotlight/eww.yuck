@@ -37,7 +37,7 @@
       (button :class "screenshot-btn ${attached_image != '' ? 'active' : ''}"
               :onclick "$HOME/.config/eww/ai-spotlight/scripts/screenshot.sh &"
               :tooltip {attached_image != "" ? "Image attached! Click to take another." : "Attach screenshot region"}
-              (label :text "󰹑" :class "screenshot-icon"))
+              (label :text "󰹑" :class "screenshot-icon" :halign "center" :valign "center"))
 
       (button :class "model-selector ${show_models == 'true' ? 'active' : ''}"
               :onclick "eww -c $HOME/.config/eww update show_models=${show_models == 'true' ? 'false' : 'true'}"
