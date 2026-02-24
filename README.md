@@ -11,6 +11,44 @@ A personal collection of [EWW](https://github.com/elkowar/eww) widgets for my Ar
 
 ---
 
+## Repo Structure
+
+This repo is designed to be cloned directly into `~/.config/eww/`. Each widget lives in its own subdirectory. The root `eww.yuck` and `eww.scss` act as entry points that simply import each widget — keeping everything modular and clean.
+
+```
+~/.config/eww/
+├── eww.yuck                  ← imports each widget's yuck file
+├── eww.scss                  ← imports each widget's scss file
+└── ai-spotlight/
+    ├── eww.yuck              ← widget definition
+    ├── eww.scss              ← widget styles
+    ├── config.sh             ← user configuration (model provider, default model)
+    └── scripts/
+        ├── toggle.sh
+        ├── ask.sh
+        ├── close.sh
+        ├── fetch_models.sh
+        ├── search_models.sh
+        ├── screenshot.sh
+        └── check_opencode.sh
+```
+
+**Root entry point files:**
+
+`eww.yuck`:
+```lisp
+(include "./ai-spotlight/eww.yuck")
+```
+
+`eww.scss`:
+```scss
+@import "./ai-spotlight/eww.scss";
+```
+
+Adding a new widget is just two lines — one include in each root file.
+
+---
+
 ## Widgets
 
 ### 🔍 AI Spotlight (`ai-spotlight/`)
@@ -36,57 +74,85 @@ A Spotlight-style search bar powered by [OpenCode](https://opencode.ai/) CLI. Pr
 
 #### Installation
 
-1. **Clone this repository:**
+The repo is designed to be cloned directly into `~/.config/eww/`. All internal paths use `$HOME` so no manual path editing is needed.
+
+1. **Clone this repo into your EWW config directory:**
+
    ```bash
-   git clone https://github.com/YOUR_USERNAME/custom-widgets ~/.config/custom-widgets
-   # or wherever you want it
+   # Back up existing config if you have one
+   mv ~/.config/eww ~/.config/eww.bak
+
+   git clone https://github.com/YOUR_USERNAME/custom-widgets ~/.config/eww
    ```
 
-2. **Configure your model provider** by editing `ai-spotlight/config.sh`:
+   If you already have an `eww.yuck` / `eww.scss` and want to keep them, just copy the widget folder and add the imports manually:
+
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/custom-widgets /tmp/custom-widgets
+   cp -r /tmp/custom-widgets/ai-spotlight ~/.config/eww/ai-spotlight
+   ```
+
+   Then add these two lines to your existing root files:
+
+   `~/.config/eww/eww.yuck`:
+   ```lisp
+   (include "./ai-spotlight/eww.yuck")
+   ```
+
+   `~/.config/eww/eww.scss`:
+   ```scss
+   @import "./ai-spotlight/eww.scss";
+   ```
+
+2. **Make scripts executable:**
+
+   ```bash
+   chmod +x ~/.config/eww/ai-spotlight/scripts/*.sh ~/.config/eww/ai-spotlight/config.sh
+   ```
+
+3. **Configure your model provider** by editing `~/.config/eww/ai-spotlight/config.sh`:
+
    ```bash
    # Filter models by provider prefix (empty = show all models)
    export MODEL_PROVIDER="github-copilot"
-   
+
    # The model selected by default when the widget opens
    export DEFAULT_MODEL="github-copilot/gpt-5-mini"
    ```
 
    **Not a GitHub Copilot user?** Change to your provider:
+
    ```bash
    # OpenAI
    export MODEL_PROVIDER="openai"
    export DEFAULT_MODEL="openai/gpt-4o"
-   
+
    # Google
    export MODEL_PROVIDER="google"
    export DEFAULT_MODEL="google/gemini-2.0-flash"
-   
+
    # Show all providers
    export MODEL_PROVIDER=""
    export DEFAULT_MODEL="openai/gpt-4o"
    ```
-   
+
    Valid model IDs can be listed with: `opencode models`
 
-3. **Make scripts executable:**
-   ```bash
-   chmod +x ai-spotlight/scripts/*.sh ai-spotlight/config.sh
-   ```
-
 4. **Add the keybinding** to your Hyprland config (e.g. `~/.config/hypr/bindings.conf`):
+
    ```ini
    # Toggle AI Spotlight with SUPER+SHIFT+L
    unbind = SUPER SHIFT, L
-   bind = SUPER SHIFT, L, exec, /path/to/custom-widgets/ai-spotlight/scripts/toggle.sh
-   
+   bind = SUPER SHIFT, L, exec, $HOME/.config/eww/ai-spotlight/scripts/toggle.sh
+
    submap = spotlight
-   bind = , Escape, exec, /path/to/custom-widgets/ai-spotlight/scripts/toggle.sh
-   bind = SUPER SHIFT, L, exec, /path/to/custom-widgets/ai-spotlight/scripts/toggle.sh
+   bind = , Escape, exec, $HOME/.config/eww/ai-spotlight/scripts/toggle.sh
+   bind = SUPER SHIFT, L, exec, $HOME/.config/eww/ai-spotlight/scripts/toggle.sh
    submap = reset
    ```
-   Replace `/path/to/custom-widgets` with the actual path where you cloned this repo.
 
 5. **Reload Hyprland config:**
+
    ```bash
    hyprctl reload
    ```

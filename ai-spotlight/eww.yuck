@@ -40,7 +40,7 @@
               (label :text "󰹑" :class "screenshot-icon"))
 
       (button :class "model-selector ${show_models == 'true' ? 'active' : ''}"
-              :onclick "eww -c $HOME/.config/eww/ai-spotlight update show_models=${show_models == 'true' ? 'false' : 'true'}"
+              :onclick "eww -c $HOME/.config/eww update show_models=${show_models == 'true' ? 'false' : 'true'}"
               (box :orientation "h" :space-evenly false :halign "center"
                 (label :text current_model :class "model-label")
                 (label :text " " :class "dropdown-icon"))))
@@ -51,7 +51,7 @@
         (scroll :hscroll false :vscroll true :class "models-scroll"
           (box :orientation "v" :space-evenly false
             (for model in filtered_models
-              (button :class "model-btn" :onclick "eww -c $HOME/.config/eww/ai-spotlight update current_model='${model}' show_models=false" "${model}"))))))
+              (button :class "model-btn" :onclick "eww -c $HOME/.config/eww update current_model='${model}' show_models=false" "${model}"))))))
 
     (revealer :transition "slidedown" :reveal {ai_response != "" || is_loading == "true"} :duration "300ms"
       (box :class "response-container" :orientation "v" :space-evenly false

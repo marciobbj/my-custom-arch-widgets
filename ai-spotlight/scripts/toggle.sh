@@ -1,11 +1,12 @@
 #!/bin/bash
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-EWW_DIR="$(dirname "$SCRIPT_DIR")"
+WIDGET_DIR="$(dirname "$SCRIPT_DIR")"
+EWW_DIR="$(dirname "$WIDGET_DIR")"
 EWW_CMD="/usr/bin/eww -c $EWW_DIR"
 
 "$SCRIPT_DIR/check_opencode.sh" || exit 1
 
-source "$EWW_DIR/config.sh"
+source "$WIDGET_DIR/config.sh"
 
 state=$($EWW_CMD active-windows | grep opencode_spotlight_closer)
 

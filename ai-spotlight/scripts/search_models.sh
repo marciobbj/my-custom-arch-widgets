@@ -1,8 +1,9 @@
 #!/bin/bash
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-EWW_DIR="$(dirname "$SCRIPT_DIR")"
+WIDGET_DIR="$(dirname "$SCRIPT_DIR")"
+EWW_DIR="$(dirname "$WIDGET_DIR")"
 EWW_CMD="/usr/bin/eww -c $EWW_DIR"
-source "$EWW_DIR/config.sh"
+source "$WIDGET_DIR/config.sh"
 
 if ! command -v opencode >/dev/null 2>&1 && [ ! -f "/usr/bin/opencode" ]; then
     $EWW_CMD update filtered_models='["OpenCode CLI missing"]'
