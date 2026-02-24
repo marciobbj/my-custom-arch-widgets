@@ -69,7 +69,7 @@ The repo is designed to be cloned directly into `~/.config/eww/`. All internal p
    If you already have an `eww.yuck` / `eww.scss` and want to keep them, just copy the widget folder and add the imports manually:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/custom-widgets /tmp/custom-widgets
+   git clone https://github.com/marciobbj/custom-widgets /tmp/custom-widgets
    cp -r /tmp/custom-widgets/ai-spotlight ~/.config/eww/ai-spotlight
    ```
 
