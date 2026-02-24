@@ -13,7 +13,7 @@ A personal collection of [EWW](https://github.com/elkowar/eww) widgets for my Ar
 
 ## Repo Structure
 
-This repo is designed to be cloned directly into `~/.config/eww/`. You can also just copy the folder and import the components directly in your main `eww.yuck` and `eww.scss`. This project is meant to let each widget lives in its own subdirectory. The root `eww.yuck` and `eww.scss` act as entry points that simply import each widget — keeping everything modular and clean.
+This repo is designed to be cloned directly into `~/.config/eww/`. You can also just copy the folder and import the components directly in your main `eww.yuck` and `eww.scss`. This project is meant to let each widget live in its own subdirectory. The root `eww.yuck` and `eww.scss` act as entry points that simply import each widget — keeping everything modular and clean.
 
 **Root entry point files:**
 `eww.yuck`:
