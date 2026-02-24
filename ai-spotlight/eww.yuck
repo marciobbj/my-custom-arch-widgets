@@ -4,6 +4,9 @@
 (defvar show_models "false")
 (defvar filtered_models "[]")
 (defvar attached_image "")
+(defpoll spinner_frame :interval "100ms"
+  :initial "󰪡"
+  `$HOME/.config/eww/ai-spotlight/scripts/spinner.sh`)
 
 (defwindow opencode_spotlight_closer
   :monitor 0
@@ -57,6 +60,8 @@
       (box :class "response-container" :orientation "v" :space-evenly false
         (scroll :hscroll false :vscroll true :class "response-scroll"
           (box :orientation "v" :space-evenly false
-            (label :class "loading" :visible {is_loading == "true"} :text "Thinking...")
+            (box :class "loading-box" :orientation "h" :space-evenly false :visible {is_loading == "true"} :halign "start" :valign "center"
+              (label :class "loading-spinner" :text spinner_frame :halign "center" :valign "center")
+              (label :class "loading-text" :text "Thinking..." :halign "start" :valign "center"))
             (label :class "response-text" :visible {is_loading == "false"} :text ai_response :wrap true :xalign 0 :yalign 0)))))
   ))

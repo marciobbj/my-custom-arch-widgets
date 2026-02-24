@@ -96,7 +96,18 @@
 
 }
 
-.loading {
+.loading-box {
+  padding: 4px 0;
+}
+
+.loading-spinner {
+  font-size: 18px;
+  color: #7aa2f7;
+  margin-right: 10px;
+  min-width: 22px;
+}
+
+.loading-text {
   color: #a0a0a0;
   font-size: 15px;
   font-style: italic;
