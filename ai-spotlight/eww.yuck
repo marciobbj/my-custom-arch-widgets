@@ -8,24 +8,14 @@
   :initial "󰪡"
   `$HOME/.config/eww/ai-spotlight/scripts/spinner.sh`)
 
-(defwindow opencode_spotlight_closer
-  :monitor 0
-  :geometry (geometry :width "100%" :height "100%")
-  :stacking "fg"
-  :focusable false
-  (eventbox :onclick "$HOME/.config/eww/ai-spotlight/scripts/close.sh"))
-
 (defwindow opencode_spotlight
   :monitor 0
   :geometry (geometry :x "0%"
                       :y "20%"
                       :width "800px"
-                      :height "80px"
                       :anchor "top center")
-  :stacking "overlay"
-  :windowtype "normal"
-  :wm-ignore false
-  :focusable true
+  :namespace "ai-spotlight"
+  :focusable "ondemand"
   (spotlight_widget))
 
 (defwidget spotlight_widget []
@@ -40,6 +30,7 @@
       (button :class "screenshot-btn ${attached_image != '' ? 'active' : ''}"
               :onclick "$HOME/.config/eww/ai-spotlight/scripts/screenshot.sh &"
               :tooltip {attached_image != "" ? "Image attached! Click to take another." : "Attach screenshot region"}
+              :valign "center"
               (label :text "󰹑" :class "screenshot-icon" :halign "center" :valign "center"))
 
       (button :class "model-selector ${show_models == 'true' ? 'active' : ''}"
@@ -65,5 +56,7 @@
                 (label :class "loading-spinner" :text spinner_frame :halign "center" :valign "center")
                 (label :class "loading-text" :text "Thinking..." :halign "start" :valign "center")))
             (revealer :transition "slidedown" :reveal {is_loading == "false" && ai_response != ""} :duration "200ms"
-              (label :class "response-text" :text ai_response :wrap true :xalign 0 :yalign 0))))))
-  ))
+              (box :orientation "h" :space-evenly false
+                (label :class "response-text" :text ai_response :wrap true :xalign 0 :yalign 0 :hexpand true)
+                (button :class "copy-btn" :onclick "$HOME/.config/eww/ai-spotlight/scripts/copy_from_eww.sh &" :tooltip "Copiar resposta" :valign "start"
+                  (label :text "󰅱" :halign "center" :valign "center"))))))))))

@@ -8,7 +8,7 @@
   border-radius: 16px;
   border: 1px solid #333333;
   padding: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .search-bar {
@@ -96,6 +96,24 @@
 
 }
 
+.copy-btn {
+  background: transparent;
+  border-radius: 8px;
+  padding: 7px;
+  margin-left: 8px;
+  color: #a0a0a0;
+  transition: all 0.2s;
+}
+
+.copy-btn:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.copy-btn label {
+  font-size: 18px;
+}
+
 .loading-box {
   padding: 4px 0;
 }
@@ -130,7 +148,7 @@
 .screenshot-btn {
   background-color: transparent;
   border-radius: 8px;
-  padding: 8px 10px;
+  padding: 8px;
   color: #a0a0a0;
   margin-left: 10px;
   transition: all 0.2s;
